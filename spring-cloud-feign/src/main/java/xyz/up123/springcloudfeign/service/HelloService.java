@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import xyz.up123.common.User;
+import xyz.up123.springcloudfeign.service.fallback.HelloServiceHystric;
 
 /**
  * @Author：ZhuWenming
@@ -12,7 +13,7 @@ import xyz.up123.common.User;
  * @Description：TODO
  * @Version: V1.0.0
  */
-@FeignClient(value = "SPRING-CLOUD-EUREKA-CLIENT")
+@FeignClient(value = "SPRING-CLOUD-EUREKA-CLIENT", fallback = HelloServiceHystric.class)
 public interface HelloService {
     @RequestMapping(value = "/hi",method = RequestMethod.GET)
     String sayHiFromClientOne(@RequestParam(value = "name") String name);
